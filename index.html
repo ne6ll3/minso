@@ -32,7 +32,7 @@
             <a href="#problema">O Problema</a>
             <a href="#solucao">Solução</a>
             <a href="#funcionalidades">Funcionalidades</a>
-            <a onclick="abrirRegisto('trial')" class="nav-cta" target="_blank">Testar grátis</a>
+            <a data-registo="trial" class="nav-cta" target="_blank">Testar grátis</a>
         </div>
         <button class="nav-mobile-toggle" aria-label="Menu">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -56,7 +56,7 @@
                 </div>
                 <h1 class="hero-title">Pedidos errados e atrasos custam dinheiro ao seu restaurante.</h1>
                 <p class="hero-sub">Organize pedidos da mesa à cozinha sem confusão. Funciona mesmo com internet fraca.</p>
-                <a onclick="abrirRegisto('trial')" class="hero-cta" target="_blank">
+                <a data-registo="trial" class="hero-cta" target="_blank">
                     Testar grátis no restaurante
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -255,7 +255,7 @@
           <li><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Painel de gestão</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Sem faturação AGT</li>
         </ul>
-        <button class="plan-btn" onclick="abrirRegisto('trial')">Começar grátis</button>
+        <button class="plan-btn" data-registo="trial">Começar grátis</button>
         <div class="plan-trial">Sem cartão de crédito</div>
       </div>
       <!-- Start -->
@@ -270,7 +270,7 @@
           <li><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>WebSocket em tempo real</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Suporte prioritário</li>
         </ul>
-        <button class="plan-btn" onclick="abrirRegisto('start')">Começar com Start</button>
+        <button class="plan-btn" data-registo="start">Começar com Start</button>
         <div class="plan-trial">14 dias grátis incluídos</div>
       </div>
       <!-- Pro -->
@@ -287,7 +287,7 @@
           <li><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Relatórios avançados</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Suporte dedicado</li>
         </ul>
-        <button class="plan-btn" onclick="abrirRegisto('pro')">Começar com Pro</button>
+        <button class="plan-btn" data-registo="pro">Começar com Pro</button>
         <div class="plan-trial">14 dias grátis incluídos</div>
       </div>
     </div>
@@ -298,7 +298,7 @@
         <div class="cta-container animate-in">
             <h2>Pronto para organizar o seu restaurante?</h2>
             <p>Teste gratuitamente durante 14 dias. Sem cartão de crédito, sem compromisso.</p>
-            <a onclick="abrirRegisto('trial')" target="_blank">
+            <a data-registo="trial" target="_blank">
                 Testar grátis no restaurante
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -319,19 +319,19 @@
       <!-- Selecção de plano -->
       <div style="margin-bottom:.4rem;font-size:.75rem;font-weight:600;letter-spacing:.02em">Escolha o seu plano</div>
       <div class="modal-plan-grid" id="planGrid">
-        <div class="modal-plan sel" id="mpTrial" onclick="selPlano('trial')">
+        <div class="modal-plan sel" id="mpTrial" data-selplano="trial">
           <div class="modal-plan-check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
           <div class="modal-plan-name">Trial</div>
           <div class="modal-plan-price">Grátis</div>
           <div class="modal-plan-period">14 dias</div>
         </div>
-        <div class="modal-plan" id="mpStart" onclick="selPlano('start')">
+        <div class="modal-plan" id="mpStart" data-selplano="start">
           <div class="modal-plan-check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
           <div class="modal-plan-name">Start</div>
           <div class="modal-plan-price">19.899</div>
           <div class="modal-plan-period">Kz / mês</div>
         </div>
-        <div class="modal-plan" id="mpPro" onclick="selPlano('pro')">
+        <div class="modal-plan" id="mpPro" data-selplano="pro">
           <div class="modal-plan-check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
           <div class="modal-plan-name">Pro</div>
           <div class="modal-plan-price">29.899</div>
@@ -343,11 +343,11 @@
       <div id="payFields" style="display:none">
         <div style="font-size:.75rem;font-weight:600;margin-bottom:.5rem;letter-spacing:.02em">Método de pagamento</div>
         <div class="metodo-grid">
-          <div class="metodo-opt sel" id="mTransferencia" onclick="selMetodo('transferencia')">
+          <div class="metodo-opt sel" id="mTransferencia" data-selmetodo="transferencia">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
             Transferência
           </div>
-          <div class="metodo-opt" id="mMulticaixa" onclick="selMetodo('multicaixa')">
+          <div class="metodo-opt" id="mMulticaixa" data-selmetodo="multicaixa">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
             Multicaixa
           </div>
@@ -392,7 +392,7 @@
 
       <div class="form-status" id="fStatus"></div>
 
-      <button class="btn-submit" id="fSubmit" onclick="submeterRegisto()">
+      <button class="btn-submit" id="fSubmit" >
         <span id="fBtnText">Criar conta</span>
       </button>
       <div class="modal-footer-note">
@@ -486,7 +486,6 @@
             <p>Desenvolvido por <a href="#">Mobroh</a></p>
         </div>
     </footer>
-
-    <script src="js/script.js"></script>
+ <script src="js/script.js"></script>
 </body>
 </html>

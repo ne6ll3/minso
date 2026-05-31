@@ -1,5 +1,4 @@
-
-    // ═══════════════════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════════
 //  CONFIG — alterar para o URL de produção
 // ═══════════════════════════════════════════════════════════════════
 const API_BASE = 'https://mineso-backend-mqdo.onrender.com';
@@ -71,16 +70,7 @@ function abrirRegisto(plano) {
   setTimeout(() => document.getElementById('fNome').focus(), 100);
 }
 
-document.getElementById('modalCloseBtn').addEventListener('click', () => {
-  document.getElementById('modalRegisto').classList.remove('vis');
-});
-document.getElementById('modalRegisto').addEventListener('click', e => {
-  if (e.target === document.getElementById('modalRegisto'))
-    document.getElementById('modalRegisto').classList.remove('vis');
-});
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') document.getElementById('modalRegisto').classList.remove('vis');
-});
+// listeners movidos para DOMContentLoaded
 
 // ═══════════════════════════════════════════════════════════════════
 //  PLANO / METODO
@@ -106,7 +96,7 @@ function selMetodo(m) {
   });
   document.getElementById('payRef').innerHTML = PAY_REF[m] || '';
 }
-selMetodo('transferencia'); // inicializar ref display
+// selMetodo inicializado em DOMContentLoaded
 
 // ═══════════════════════════════════════════════════════════════════
 //  SUBMISSÃO
@@ -221,3 +211,47 @@ document.addEventListener('keydown', e => {
   }
 });
     
+// ═══════════════════════════════════════════════════════════════════
+//  WIRING — addEventListener em vez de onclick inline
+// ═══════════════════════════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  // Botões de abrir registo (data-registo="trial|start|pro")
+  document.querySelectorAll('[data-registo]').forEach(el => {
+    el.addEventListener('click', e => {
+      e.preventDefault();
+      abrirRegisto(el.dataset.registo || 'trial');
+    });
+  });
+
+  // Selecção de plano no modal
+  document.querySelectorAll('[data-selplano]').forEach(el => {
+    el.addEventListener('click', () => selPlano(el.dataset.selplano));
+  });
+
+  // Selecção de método de pagamento
+  document.querySelectorAll('[data-selmetodo]').forEach(el => {
+    el.addEventListener('click', () => selMetodo(el.dataset.selmetodo));
+  });
+
+  // Botão de submissão
+  document.getElementById('fSubmit')?.addEventListener('click', submeterRegisto);
+
+  // Fechar modal
+  document.getElementById('modalCloseBtn')?.addEventListener('click', () => {
+    document.getElementById('modalRegisto').classList.remove('vis');
+  });
+  document.getElementById('modalRegisto')?.addEventListener('click', e => {
+    if (e.target === document.getElementById('modalRegisto'))
+      document.getElementById('modalRegisto').classList.remove('vis');
+  });
+
+  // Enter nos inputs do modal
+  document.querySelectorAll('#modalRegisto .form-input').forEach(input => {
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Enter') submeterRegisto();
+    });
+  });
+
+  // Inicializar referência de pagamento
+  selMetodo('transferencia');
+});
