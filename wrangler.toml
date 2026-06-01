@@ -1,0 +1,19 @@
+name = "minso"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+BACKEND_URL = "https://mineso-backend-mqdo.onrender.com"
+
+# KV Namespace para servir a landing page (criar com: wrangler kv:namespace create ASSETS)
+# Depois fazer upload: wrangler kv:key put --binding=ASSETS "index.html" --path=mineso_landing.html
+# [[kv_namespaces]]
+# binding = "ASSETS"
+# id = "SEU_KV_NAMESPACE_ID"
+
+[build]
+# Se quiser usar assets estáticos com Cloudflare Pages em vez de KV:
+# command = ""
+# [build.upload]
+# format = "modules"
