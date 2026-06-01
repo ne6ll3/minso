@@ -17,7 +17,7 @@
  *   Se não existir, redireccionamos para o backend directamente.
  */
 
-const BACKEND_URL = 'https://menuos-backend-mqdo.onrender.com';
+const BACKEND_URL = 'https://mineso-backend-mqdo.onrender.com';
 
 // Headers CORS para respostas da landing (recursos estáticos)
 const STATIC_HEADERS = {

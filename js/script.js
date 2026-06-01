@@ -4,7 +4,7 @@
 // API_BASE aponta para o Worker (mesmo origin) que faz proxy ao backend
 // Isto elimina o CORS completamente — o Worker e a landing estão no mesmo domínio
 const API_BASE = '';  // mesmo origin — Worker em /api/proxy/*
-const BACKEND  = 'https://menuos-backend-mqdo.onrender.com'; // usado só internamente pelo Worker
+const BACKEND  = 'https://mineso-backend-mqdo.onrender.com'; // usado só internamente pelo Worker
 
 // ═══════════════════════════════════════════════════════════════════
 //  ESTADO
