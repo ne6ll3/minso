@@ -211,47 +211,34 @@ document.addEventListener('keydown', e => {
   }
 });
     
-// ═══════════════════════════════════════════════════════════════════
-//  WIRING — addEventListener em vez de onclick inline
-// ═══════════════════════════════════════════════════════════════════
-document.addEventListener('DOMContentLoaded', () => {
-  // Botões de abrir registo (data-registo="trial|start|pro")
-  document.querySelectorAll('[data-registo]').forEach(el => {
-    el.addEventListener('click', e => {
+// WIRING — executado directamente (script no fim do body, DOM pronto)
+;(function wire() {
+  document.querySelectorAll('[data-registo]').forEach(function(el) {
+    el.addEventListener('click', function(e) {
       e.preventDefault();
-      abrirRegisto(el.dataset.registo || 'trial');
+      abrirRegisto(el.getAttribute('data-registo') || 'trial');
     });
   });
-
-  // Selecção de plano no modal
-  document.querySelectorAll('[data-selplano]').forEach(el => {
-    el.addEventListener('click', () => selPlano(el.dataset.selplano));
+  document.querySelectorAll('[data-selplano]').forEach(function(el) {
+    el.addEventListener('click', function() { selPlano(el.getAttribute('data-selplano')); });
   });
-
-  // Selecção de método de pagamento
-  document.querySelectorAll('[data-selmetodo]').forEach(el => {
-    el.addEventListener('click', () => selMetodo(el.dataset.selmetodo));
+  document.querySelectorAll('[data-selmetodo]').forEach(function(el) {
+    el.addEventListener('click', function() { selMetodo(el.getAttribute('data-selmetodo')); });
   });
-
-  // Botão de submissão
-  document.getElementById('fSubmit')?.addEventListener('click', submeterRegisto);
-
-  // Fechar modal
-  document.getElementById('modalCloseBtn')?.addEventListener('click', () => {
+  var btnSubmit = document.getElementById('fSubmit');
+  if (btnSubmit) btnSubmit.addEventListener('click', submeterRegisto);
+  var btnClose  = document.getElementById('modalCloseBtn');
+  if (btnClose)  btnClose.addEventListener('click', function() {
     document.getElementById('modalRegisto').classList.remove('vis');
   });
-  document.getElementById('modalRegisto')?.addEventListener('click', e => {
-    if (e.target === document.getElementById('modalRegisto'))
-      document.getElementById('modalRegisto').classList.remove('vis');
+  var backdrop  = document.getElementById('modalRegisto');
+  if (backdrop)  backdrop.addEventListener('click', function(e) {
+    if (e.target === backdrop) backdrop.classList.remove('vis');
   });
-
-  // Enter nos inputs do modal
-  document.querySelectorAll('#modalRegisto .form-input').forEach(input => {
-    input.addEventListener('keydown', e => {
+  document.querySelectorAll('#modalRegisto .form-input').forEach(function(input) {
+    input.addEventListener('keydown', function(e) {
       if (e.key === 'Enter') submeterRegisto();
     });
   });
-
-  // Inicializar referência de pagamento
   selMetodo('transferencia');
-});
+})();
