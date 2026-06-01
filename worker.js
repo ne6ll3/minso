@@ -1,20 +1,5 @@
 /**
  * MineSO — Cloudflare Worker
- *
- * Responsabilidades:
- *  1. GET /          → servir a landing page (index.html em KV ou inline)
- *  2. /api/*         → proxy transparente ao backend Render (sem CORS)
- *  3. Qualquer outro → 404
- *
- * Deploy:
- *   wrangler deploy
- *
- * Variáveis de ambiente (wrangler.toml ou Cloudflare Dashboard):
- *   BACKEND_URL = https://mineso-backend-mqdo.onrender.com
- *
- * KV Namespace (opcional — para servir a landing do KV):
- *   ASSETS binding com a key "index.html"
- *   Se não existir, redireccionamos para o backend directamente.
  */
 
 const BACKEND_URL = 'https://mineso-backend-mqdo.onrender.com';
