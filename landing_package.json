@@ -1,0 +1,8 @@
+{
+  "name": "mineso-landing",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node landing_server.js"
+  },
+  "engines": { "node": ">=18.0.0" }
+}

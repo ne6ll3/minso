@@ -1,4 +1,6 @@
-       :root {
+
+    
+        :root {
             --core-black: #262627;
             --core-white: #FAFDFE;
             --accent-gold: #C9A227;
@@ -839,3 +841,5 @@ section{padding:7rem 5vw}
         .pricing-grid { grid-template-columns: 1fr; }
         .pricing-section { padding: 4rem 5vw; }
     }
+    
+    

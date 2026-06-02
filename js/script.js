@@ -1,10 +1,9 @@
-// ═══════════════════════════════════════════════════════════════════
+
+    
+    // ═══════════════════════════════════════════════════════════════════
 //  CONFIG — alterar para o URL de produção
 // ═══════════════════════════════════════════════════════════════════
-// API_BASE aponta para o Worker (mesmo origin) que faz proxy ao backend
-// Isto elimina o CORS completamente — o Worker e a landing estão no mesmo domínio
-const API_BASE = '';  // mesmo origin — Worker em /api/proxy/*
-const BACKEND  = 'https://mineso-backend-mqdo.onrender.com'; // usado só internamente pelo Worker
+const API_BASE = 'https://mineso-backend-mqdo.onrender.com';
 
 // ═══════════════════════════════════════════════════════════════════
 //  ESTADO
@@ -73,7 +72,29 @@ function abrirRegisto(plano) {
   setTimeout(() => document.getElementById('fNome').focus(), 100);
 }
 
-// listeners movidos para DOMContentLoaded
+// Fechar modal
+document.getElementById('modalCloseBtn').addEventListener('click', function() {
+  document.getElementById('modalRegisto').classList.remove('vis');
+});
+document.getElementById('modalRegisto').addEventListener('click', function(e) {
+  if (e.target === document.getElementById('modalRegisto'))
+    document.getElementById('modalRegisto').classList.remove('vis');
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') document.getElementById('modalRegisto').classList.remove('vis');
+});
+
+// Wiring dos botões data-* (substituem os onclick inline)
+document.querySelectorAll('[data-registo]').forEach(function(el) {
+  el.addEventListener('click', function(e) { e.preventDefault(); abrirRegisto(el.getAttribute('data-registo')); });
+});
+document.querySelectorAll('[data-selplano]').forEach(function(el) {
+  el.addEventListener('click', function() { selPlano(el.getAttribute('data-selplano')); });
+});
+document.querySelectorAll('[data-selmetodo]').forEach(function(el) {
+  el.addEventListener('click', function() { selMetodo(el.getAttribute('data-selmetodo')); });
+});
+document.getElementById('fSubmit').addEventListener('click', submeterRegisto);
 
 // ═══════════════════════════════════════════════════════════════════
 //  PLANO / METODO
@@ -99,7 +120,7 @@ function selMetodo(m) {
   });
   document.getElementById('payRef').innerHTML = PAY_REF[m] || '';
 }
-// selMetodo inicializado em DOMContentLoaded
+selMetodo('transferencia'); // inicializar ref display
 
 // ═══════════════════════════════════════════════════════════════════
 //  SUBMISSÃO
@@ -214,34 +235,4 @@ document.addEventListener('keydown', e => {
   }
 });
     
-// WIRING — executado directamente (script no fim do body, DOM pronto)
-;(function wire() {
-  document.querySelectorAll('[data-registo]').forEach(function(el) {
-    el.addEventListener('click', function(e) {
-      e.preventDefault();
-      abrirRegisto(el.getAttribute('data-registo') || 'trial');
-    });
-  });
-  document.querySelectorAll('[data-selplano]').forEach(function(el) {
-    el.addEventListener('click', function() { selPlano(el.getAttribute('data-selplano')); });
-  });
-  document.querySelectorAll('[data-selmetodo]').forEach(function(el) {
-    el.addEventListener('click', function() { selMetodo(el.getAttribute('data-selmetodo')); });
-  });
-  var btnSubmit = document.getElementById('fSubmit');
-  if (btnSubmit) btnSubmit.addEventListener('click', submeterRegisto);
-  var btnClose  = document.getElementById('modalCloseBtn');
-  if (btnClose)  btnClose.addEventListener('click', function() {
-    document.getElementById('modalRegisto').classList.remove('vis');
-  });
-  var backdrop  = document.getElementById('modalRegisto');
-  if (backdrop)  backdrop.addEventListener('click', function(e) {
-    if (e.target === backdrop) backdrop.classList.remove('vis');
-  });
-  document.querySelectorAll('#modalRegisto .form-input').forEach(function(input) {
-    input.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') submeterRegisto();
-    });
-  });
-  selMetodo('transferencia');
-})();
+    
