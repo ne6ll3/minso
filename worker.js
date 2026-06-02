@@ -1,5 +1,5 @@
 const LANDING_URL = 'https://mineso-landing.onrender.com';
-const BACKEND_URL = 'https://mineso-backend-mqdo.onrender.com';
+const BACKEND_URL = 'https://menuos-backend-mqdo.onrender.com;
 
 export default {
   async fetch(request, env) {
