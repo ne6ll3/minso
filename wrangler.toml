@@ -3,5 +3,5 @@ main = "worker.js"
 compatibility_date = "2024-01-01"
 
 [vars]
-LANDING_URL = "https://mineso-landing.onrender.com"
-BACKEND_URL = "https://mineso-backend-mqdo.onrender.com"
+LANDING_URL = "minso.mobroh77.workers.dev"
+BACKEND_URL = "https://mineso-landing.onrender.com"
