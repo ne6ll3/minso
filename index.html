@@ -1254,7 +1254,7 @@ section{padding:7rem 5vw}
         </div>
         <div class="success-title" id="successTitle">Conta criada!</div>
         <div class="success-text" id="successText">O seu restaurante está pronto. Aceda ao painel de gestão para configurar as mesas e o menu.</div>
-        <a href="#" id="successLink" class="success-link" target="_blank">
+        <a id="successLink" class="success-link" href="#" style="cursor:pointer">
           Abrir Painel de Gestão
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
@@ -1559,8 +1559,14 @@ function mostrarSucesso(data, nome) {
   // apenas lido pelo JavaScript da kitchen para fazer auto-login
   const token      = data.token || '';
   const kitchenUrl = BACKEND_URL + '/kitchen' + (token ? '#token=' + encodeURIComponent(token) : '');
-  document.getElementById('successLink').href   = kitchenUrl;
-  document.getElementById('successLink').target = '_blank';
+  // Guardar URL e abrir directamente no click
+  const btn = document.getElementById('successLink');
+  btn.setAttribute('href', kitchenUrl);
+  btn.setAttribute('target', '_blank');
+  btn.onclick = function(e) {
+    e.preventDefault();
+    window.open(kitchenUrl, '_blank');
+  };
 }
 
 function esc(s) {
