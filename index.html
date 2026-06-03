@@ -1337,7 +1337,8 @@ section{padding:7rem 5vw}
     // ═══════════════════════════════════════════════════════════════════
 //  CONFIG — alterar para o URL de produção
 // ═══════════════════════════════════════════════════════════════════
-const API_BASE = ''; // mesmo origin — Worker proxy em /api/*
+const API_BASE   = '';  // mesmo origin — Worker proxy /api/* → backend
+const BACKEND_URL = 'https://mineso-backend-mqdo.onrender.com'; // URL directo para redirect
 
 // ═══════════════════════════════════════════════════════════════════
 //  ESTADO
@@ -1553,8 +1554,13 @@ function mostrarSucesso(data, nome) {
       'Enquanto isso pode usar o trial de 14 dias.';
   }
 
-  const kitchenUrl = API_BASE + '/kitchen';
-  document.getElementById('successLink').href = kitchenUrl;
+  // Construir URL do kitchen no backend com token de auto-login
+  // O token é passado como hash fragment (#token=...) — não vai ao servidor,
+  // apenas lido pelo JavaScript da kitchen para fazer auto-login
+  const token      = data.token || '';
+  const kitchenUrl = BACKEND_URL + '/kitchen' + (token ? '#token=' + encodeURIComponent(token) : '');
+  document.getElementById('successLink').href   = kitchenUrl;
+  document.getElementById('successLink').target = '_blank';
 }
 
 function esc(s) {
